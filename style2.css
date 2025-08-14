@@ -1,0 +1,94 @@
+/* Reset ringan */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:#111;}
+
+/* HERO: video background full-screen */
+.hero{
+  position:relative;
+  width:100%;
+  height:100vh;             /* penuh layar */
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* video element mengisi area dan menjaga aspect ratio */
+.hero__video{
+  position:absolute;
+  inset:0;                  /* top:0;right:0;bottom:0;left:0; */
+  width:100%;
+  height:100%;
+  object-fit:cover;         /* mengisi area tanpa distorsi */
+  z-index:0;
+  transform-origin:center center;
+  will-change:transform, opacity;
+}
+
+/* lapisan gelap/gradasi agar teks terbaca */
+.hero__overlay{
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.45));
+  z-index:1;
+}
+
+/* konten di atas video */
+.hero__content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  padding: 24px;
+  max-width: 900px;
+  color: #fff;
+  text-shadow: 0 6px 20px rgba(0,0,0,0.45);
+}
+
+/* judul */
+.hero__title{
+  font-size: clamp(28px, 4.6vw, 56px);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  font-weight:700;
+}
+
+/* tanggal */
+.hero__date{
+  font-size: clamp(14px, 1.8vw, 18px);
+  margin-bottom:18px;
+  opacity:0.95;
+}
+
+/* tombol */
+.btn{
+  display:inline-block;
+  background: linear-gradient(90deg,#e75480,#ff7aa2);
+  color:white;
+  padding:10px 18px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:600;
+  margin:0 8px;
+  box-shadow: 0 8px 20px rgba(231,84,128,0.18);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.btn:hover{ transform: translateY(-4px); box-shadow: 0 14px 30px rgba(231,84,128,0.22); }
+.btn--ghost{ background: rgba(255,255,255,0.12); color:white; box-shadow:none; }
+
+/* bagian bawah halaman (konten) */
+.section{padding:56px 24px; background:#fff}
+.container{max-width:980px;margin:0 auto}
+
+/* responsive: pendant kecil di mobile, teks tidak terlalu besar */
+@media (max-width:520px){
+  .hero__title{ font-size: clamp(20px, 7vw, 30px) }
+  .hero__date{ font-size: 13px }
+  .btn{ padding:8px 12px; font-size:14px }
+}
+
+/* aksesibilitas: jika user prefer reduced motion, nonaktifkan efek bergerak */
+@media (prefers-reduced-motion: reduce){
+  .hero__video{ animation:none; transition:none }
+  .btn{ transition:none }
+}
